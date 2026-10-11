@@ -1,0 +1,24 @@
+{
+  "name": "cheapflights-web-automation",
+  "version": "1.0.0",
+  "description": "Web automation tests for cheapflights.com.au through Playwright",
+  "private": true,
+  "scripts": {
+    "build": "tsc --noEmit",
+    "test": "npx playwright test",
+    "test:ui:headed": "HEADED=1 npx playwright test --ui --headed",
+    "test:headed": "npx playwright test --headed",
+    "test:smoke": "npx playwright test --grep @smoke",
+    "test:header": "npx playwright test --grep @header",
+    "test:search": "npx playwright test --grep @search",
+    "test:results": "npx playwright test --grep @results",
+    "test:negative": "npx playwright test --grep @negative",
+    "test:ui": "npx playwright test --ui",
+    "report": "npx playwright show-report"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.61.1",
+    "@types/node": "20.12.7",
+    "typescript": "^5.6.3"
+  }
+}

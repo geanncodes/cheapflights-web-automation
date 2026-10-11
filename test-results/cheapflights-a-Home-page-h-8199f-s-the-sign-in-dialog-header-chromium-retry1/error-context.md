@@ -1,0 +1,374 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: cheapflights.spec.ts >> a. Home page header >> Validate clicking Sign in opens the sign-in dialog @header
+- Location: tests/cheapflights.spec.ts:29:9
+
+# Error details
+
+```
+Test timeout of 120000ms exceeded.
+```
+
+```
+Error: write EPIPE
+```
+
+```
+Error: expect(locator).toBeVisible() failed
+
+Locator: locator('[role="dialog"][aria-label="Sign in or create an account"]')
+Expected: visible
+Timeout: 30000ms
+Error: element(s) not found
+
+Call log:
+  - Expect "toBeVisible" with timeout 30000ms
+  - waiting for locator('[role="dialog"][aria-label="Sign in or create an account"]')
+
+```
+
+```yaml
+- navigation "Keyboard quick links":
+  - link "Skip to main content":
+    - /url: "#main"
+- banner:
+  - button "Open main navigation"
+  - link "Go to the cheapflights homepage":
+    - /url: /
+  - button "Ask AI":
+    - img
+    - text: Ask AI
+  - button "Select language":
+    - img "Australia"
+    - text: AUD
+  - button "Sign in"
+  - dialog "Navigation menu"
+- main:
+  - main:
+    - search "flight":
+      - heading "Find cheap flights from 1000s of airlines and travel agents" [level=2]
+      - navigation:
+        - menubar:
+          - menuitem "Search for flights":
+            - link "Search for flights":
+              - /url: /
+          - menuitem "Search for stays":
+            - link "Search for stays":
+              - /url: /stays/
+          - menuitem "Search for cars":
+            - link "Search for cars":
+              - /url: /cars/
+      - combobox "Trip type Return": Return
+      - list:
+        - listitem:
+          - text: Manila (MNL)
+          - button "Remove value"
+      - combobox "Origin location"
+      - button "Swap origin and destination locations"
+      - combobox "Destination location"
+      - button "Departure date": Departure
+      - button "Return date": Return
+      - combobox "Trip type": 1 adult, Economy
+      - button "Search"
+      - button "Open AI chat":
+        - img
+        - text: Flights to New De
+    - group "Travel deals under $103":
+      - heading "Travel deals under $103" [level=2]
+      - link "Explore more":
+        - /url: /explore/MNL/20261101,20261130?stops=0&tripdurationrange=3%2C7
+      - group "Kalibo":
+        - heading "Kalibo" [level=3]:
+          - link "Kalibo":
+            - /url: /flight-search/MNL-KLO/2026-11-04/2026-11-11/
+        - text: 1h 10m, direct Start date Wed 4/11 End date Wed 11/11 from $80
+      - group "Boracay":
+        - heading "Boracay" [level=3]:
+          - link "Boracay":
+            - /url: /flight-search/MNL-MPH/2026-11-03/2026-11-10/
+        - text: 1h 15m, direct Start date Tue 3/11 End date Tue 10/11 from $93
+      - group "Bacolod":
+        - heading "Bacolod" [level=3]:
+          - link "Bacolod":
+            - /url: /flight-search/MNL-BCD/2026-11-05/2026-11-10/
+        - text: 1h 20m, direct Start date Thu 5/11 End date Tue 10/11 from $96
+      - group "Roxas City":
+        - heading "Roxas City" [level=3]:
+          - link "Roxas City":
+            - /url: /flight-search/MNL-RXS/2026-11-03/2026-11-10/
+        - text: 1h 5m, direct Start date Tue 3/11 End date Tue 10/11 from $96
+      - group "Tacloban City":
+        - heading "Tacloban City" [level=3]:
+          - link "Tacloban City":
+            - /url: /flight-search/MNL-TAC/2026-11-05/2026-11-09/
+        - text: 1h 25m, direct Start date Thu 5/11 End date Mon 9/11 from $99
+      - group "Daraga":
+        - heading "Daraga" [level=3]:
+          - link "Daraga":
+            - /url: /flight-search/MNL-DRP/2026-11-03/2026-11-10/
+        - text: 1h 20m, direct Start date Tue 3/11 End date Tue 10/11 from $99
+      - group "Iloilo City":
+        - heading "Iloilo City" [level=3]:
+          - link "Iloilo City":
+            - /url: /flight-search/MNL-ILO/2026-11-05/2026-11-09/
+        - text: 1h 15m, direct Start date Thu 5/11 End date Mon 9/11 from $101
+      - group "Cebu City":
+        - heading "Cebu City" [level=3]:
+          - link "Cebu City":
+            - /url: /flight-search/MNL-CEB/2026-11-02/2026-11-06/
+        - text: 1h 30m, direct Start date Mon 2/11 End date Fri 6/11 from $102
+      - button "Scroll left" [disabled]
+      - button "Scroll right"
+    - group "For travel pros"
+    - heading "About Cheapflights" [level=4]
+    - paragraph: Cheapflights is your trusted partner in navigating the expansive travel landscape. Our sophisticated search engine is here to simplify your travel planning by providing you with a seamless experience as you search for flights, hotels, and car hires. By charging our travel providers and advertisers, we are able to stay committed to offering you a service that is not only free but also aligned with delivering the most value to you, the traveller! At Cheapflights, we're excited to be a part of your travel story.
+    - heading "Create a Price Alert and Save" [level=4]
+    - paragraph: To enhance your planning, we offer the Price Alert function, a tool designed to keep you informed about the best possible deals. If you're eyeing a flight, hotel, or car hire but aren't ready to book, simply activate a price alert with your email address. You'll receive updates when prices drop, allowing you to book at just the right moment.
+    - heading "How to get the most out of Cheapflights" [level=4]
+    - list:
+      - listitem: Utilise the filtering tools to customise your search results, aligning them with your specific travel needs, whether that be cost, convenience, or comfort.
+      - listitem: Pay attention to the total price, which includes any additional fees. Transparency is a cornerstone of our service, ensuring that the price you see is the price you pay.
+      - listitem: Be aware of the dynamic nature of travel pricing. Deals can change rapidly due to factors beyond our control, so timely booking is advisable when you find a suitable option.
+    - heading "About Cheapflights" [level=2]
+    - heading "Cheap flights" [level=1]
+    - paragraph: Search and compare cheap flights from 1000s of airlines, travel agents and travel sites.
+    - heading "Flights to Sydney" [level=3]:
+      - link "Flights to Sydney":
+        - /url: /flights-to-Sydney/
+    - button "View more deals for Flights to Sydney"
+    - heading "Flights to London" [level=3]:
+      - link "Flights to London":
+        - /url: /flights-to-London/
+    - button "View more deals for Flights to London"
+    - heading "Flights to New Delhi" [level=3]:
+      - link "Flights to New Delhi":
+        - /url: /flights-to-Delhi/
+    - button "View more deals for Flights to New Delhi"
+    - heading "Flights to Tokyo" [level=3]:
+      - link "Flights to Tokyo":
+        - /url: /flights-to-Tokyo/
+    - button "View more deals for Flights to Tokyo"
+    - heading "Flights to Auckland" [level=3]:
+      - link "Flights to Auckland":
+        - /url: /flights-to-Auckland/
+    - button "View more deals for Flights to Auckland"
+    - heading "Flights to Kuala Lumpur" [level=3]:
+      - link "Flights to Kuala Lumpur":
+        - /url: /flights-to-Kuala-Lumpur/
+    - button "View more deals for Flights to Kuala Lumpur"
+    - heading "Flights to Coolangatta" [level=3]:
+      - link "Flights to Coolangatta":
+        - /url: /flights-to-Coolangatta/
+    - button "View more deals for Flights to Coolangatta"
+    - heading "Flights to Melbourne" [level=3]:
+      - link "Flights to Melbourne":
+        - /url: /flights-to-Melbourne/
+    - button "View more deals for Flights to Melbourne"
+    - heading "Flights to Brisbane" [level=3]:
+      - link "Flights to Brisbane":
+        - /url: /flights-to-Brisbane/
+    - button "View more deals for Flights to Brisbane"
+    - heading "Flights to Bangkok" [level=3]:
+      - link "Flights to Bangkok":
+        - /url: /flights-to-Bangkok/
+    - button "View more deals for Flights to Bangkok"
+    - heading "Flights to Paris" [level=3]:
+      - link "Flights to Paris":
+        - /url: /flights-to-Paris/
+    - button "View more deals for Flights to Paris"
+    - heading "Flights to Singapore" [level=3]:
+      - link "Flights to Singapore":
+        - /url: /flights-to-Singapore-City/
+    - button "View more deals for Flights to Singapore"
+    - heading "Flights to Manila" [level=3]:
+      - link "Flights to Manila":
+        - /url: /flights-to-Manila/
+    - button "View more deals for Flights to Manila"
+    - heading "Flights to Los Angeles" [level=3]:
+      - link "Flights to Los Angeles":
+        - /url: /flights-to-Los-Angeles/
+    - button "View more deals for Flights to Los Angeles"
+    - heading "Flights to Denpasar" [level=3]:
+      - link "Flights to Denpasar":
+        - /url: /flights-to-Ngurah-Rai/
+    - button "View more deals for Flights to Denpasar"
+    - heading "Flights to Adelaide" [level=3]:
+      - link "Flights to Adelaide":
+        - /url: /flights-to-Adelaide/
+    - button "View more deals for Flights to Adelaide"
+    - heading "Flights to Perth" [level=3]:
+      - link "Flights to Perth":
+        - /url: /flights-to-Perth/
+    - button "View more deals for Flights to Perth"
+    - heading "Flights to Ho Chi Minh City" [level=3]:
+      - link "Flights to Ho Chi Minh City":
+        - /url: /flights-to-Ho-Chi-Minh-City/
+    - button "View more deals for Flights to Ho Chi Minh City"
+    - heading "Flights to Kathmandu" [level=3]:
+      - link "Flights to Kathmandu":
+        - /url: /flights-to-Kathmandu/
+    - button "View more deals for Flights to Kathmandu"
+    - heading "Flights to Rome" [level=3]:
+      - link "Flights to Rome":
+        - /url: /flights-to-Rome/
+    - button "View more deals for Flights to Rome"
+    - heading "Flights to Istanbul" [level=3]:
+      - link "Flights to Istanbul":
+        - /url: /flights-to-Istanbul/
+    - button "View more deals for Flights to Istanbul"
+    - heading "Frequently asked questions" [level=6]
+    - list:
+      - listitem:
+        - group: Who are we?
+      - listitem:
+        - group: Why come to us?
+      - listitem:
+        - group: How do we do it?
+  - heading "Popular destinations" [level=6]
+  - list:
+    - listitem:
+      - link "Flights to Australia":
+        - /url: /flights-to-Australia/
+    - listitem:
+      - link "Flights to India":
+        - /url: /flights-to-India/
+    - listitem:
+      - link "Flights to Indonesia":
+        - /url: /flights-to-Indonesia/
+    - listitem:
+      - link "Flights to Philippines":
+        - /url: /flights-to-Philippines/
+    - listitem:
+      - link "Flights to Nepal":
+        - /url: /flights-to-Nepal/
+    - listitem:
+      - link "Flights to New Zealand":
+        - /url: /flights-to-New-Zealand/
+    - listitem:
+      - link "Flights to Thailand":
+        - /url: /flights-to-Thailand/
+    - listitem:
+      - link "Flights to Vietnam":
+        - /url: /flights-to-Vietnam/
+    - listitem:
+      - link "Flights to China":
+        - /url: /flights-to-China/
+    - listitem:
+      - link "Flights to United Kingdom":
+        - /url: /flights-to-United-Kingdom/
+    - listitem:
+      - link "Flights to Japan":
+        - /url: /flights-to-Japan/
+    - listitem:
+      - link "Flights to USA":
+        - /url: /flights-to-USA/
+  - heading "Popular cities" [level=6]
+  - list:
+    - listitem:
+      - link "Flights to Melbourne":
+        - /url: /flights-to-Melbourne/
+    - listitem:
+      - link "Flights to Sydney":
+        - /url: /flights-to-Sydney/
+    - listitem:
+      - link "Flights to New Delhi":
+        - /url: /flights-to-Delhi/
+    - listitem:
+      - link "Flights to Denpasar":
+        - /url: /flights-to-Ngurah-Rai/
+    - listitem:
+      - link "Flights to Brisbane":
+        - /url: /flights-to-Brisbane/
+    - listitem:
+      - link "Flights to Kathmandu":
+        - /url: /flights-to-Kathmandu/
+    - listitem:
+      - link "Flights to Perth":
+        - /url: /flights-to-Perth/
+    - listitem:
+      - link "Flights to Manila":
+        - /url: /flights-to-Manila/
+    - listitem:
+      - link "Flights to Auckland":
+        - /url: /flights-to-Auckland/
+    - listitem:
+      - link "Flights to Amritsar":
+        - /url: /flights-to-Amritsar/
+    - listitem:
+      - link "Flights to Adelaide":
+        - /url: /flights-to-Adelaide/
+    - listitem:
+      - link "Flights to Bangkok":
+        - /url: /flights-to-Bangkok/
+- contentinfo:
+  - navigation "Company":
+    - text: Company
+    - list:
+      - listitem:
+        - link "About":
+          - /url: /about
+      - listitem:
+        - link "Mobile":
+          - /url: /mobile
+      - listitem:
+        - link "Blog":
+          - /url: https://www.cheapflights.com.au/news/
+      - listitem:
+        - link "How we work":
+          - /url: /company
+  - navigation "Contact":
+    - text: Contact
+    - list:
+      - listitem:
+        - link "Help/FAQ":
+          - /url: /contact-us
+      - listitem:
+        - link "Press":
+          - /url: /press-contact
+      - listitem:
+        - link "Publishers":
+          - /url: /publishers
+  - navigation "More":
+    - text: More
+    - list:
+      - listitem:
+        - link "Airline fees":
+          - /url: /airline-fees
+      - listitem:
+        - link "Airlines":
+          - /url: /airlines
+      - listitem:
+        - link "Low fare tips":
+          - /url: /help/lowfares
+      - listitem:
+        - link "Security":
+          - /url: https://www.kayak.com/c/security
+  - navigation "Get the Cheapflights app":
+    - text: Get the Cheapflights app
+    - link "Get it on Google Play":
+      - /url: https://play.google.com/store/apps/details?id=com.cf.flightsearch
+      - img
+    - link "Download on the App Store":
+      - /url: https://apps.apple.com/us/app/cheapflights-flights-hotels/id773105628
+      - img
+  - text: ©2026 Cheapflights
+  - button "Cookie settings"
+  - link "Privacy":
+    - /url: /privacy
+  - link "Terms & Conditions":
+    - /url: /terms-of-use
+  - link "Follow on Facebook":
+    - /url: https://www.facebook.com/cheapflights
+  - link "Follow on Twitter":
+    - /url: https://x.com/cheapflights
+```
+
+```
+Error: browserContext.close: Target page, context or browser has been closed
+```
